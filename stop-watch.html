@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <title>Task Timer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      body{
+        margin-left:auto;
+        margin-right:auto;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width:98%;
+        background: linear-gradient(to right, rgb(87, 144, 155),rgrgb(255, 230, 184),rgb(255, 255, 190));
+        border: 2px solid black;
+      }
+      button{
+        background: yellow;
+        margin:20px;
+        border:2px solid black;
+        border-radius: 26px;
+        width:17%;
+        height:13%;  
+        font-size: 2rem;
+        margin-top:0.01%;
+      }
+      button:hover{
+        transition: 0.4s;
+        transform: scaleY(1.2);
+        background-color: rgb(255, 151, 40);
+      }
+      h1{
+        color:rgb(4, 71, 4);
+        font-size: 7rem;
+        margin-top:2%;
+      }
+      i{
+        font-size:9rem;
+        margin-top:2%;
+      }
+     
+
+    </style>
+    <script>
+        let tim;
+        let hour=0;
+        let mint=0;
+        let sec=0;
+        let msec=0;
+        let f_sec = sec;
+        let f_mint = mint;
+        let f_hour = hour;
+        function counter(){
+          //sec = int(sec);
+          sec++;
+          if(sec==1 || sec==2 || sec==3 || sec==4 || sec==5 || sec==6 || sec==7 || sec==8 || sec==9){
+            f_sec=String(sec);
+            f_sec = `0${f_sec}`
+          }else{
+            f_sec= sec;
+          }
+          if(mint==0 || mint==1 || mint==2 || mint==3 || mint==4 || mint==5 || mint==6 || mint==7 || mint==8 || mint==9){
+            f_mint=String(mint);
+            f_mint = `0${f_mint}`
+          }else{
+            f_mint = mint;
+          }
+          if(hour==0 || hour==1 || hour==2 || hour==3 || hour==4 || hour==5 || hour==6 || hour==7 || hour==8 || hour==9){
+            f_hour=String(hour);
+            f_hour = `0${f_hour}`
+          }else{
+            f_hour = hour;
+          }
+          if(sec == 60){
+            mint++;
+            sec=0;
+          }
+          if(mint == 60){
+            hour++;
+            sec=0;
+            mint=0;
+          }
+          document.querySelector('#timer').innerHTML=`${f_hour} : ${f_mint} : ${f_sec}`;
+        }
+
+        function start(){
+          tim = setInterval(counter,1000);
+        }
+        function stop(){
+          clearInterval(tim);
+        }
+
+        function reset(){
+          clearInterval(tim);
+          hour=0;
+          mint=0;
+          sec=0;
+          document.querySelector('#timer').innerHTML = "00 : 00 : 00";
+          
+        }
+
+    </script>
+  </head>
+  <body>
+    <i class="fa-regular fa-bell"></i>
+    <h1 id="timer">00 : 00 : 00</h1>
+    <button id="start" onclick="start()">Start</button>
+    <button id="stop" onclick="stop()">Pause</button>
+    <button id="reset" onclick="reset()">Reset</button>
+
+  </body>
+</html>
